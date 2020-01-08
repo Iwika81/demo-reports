@@ -1,0 +1,5 @@
+server:
+   port: 7095
+joinfaces:
+   jsf:
+      project-stage: Development
