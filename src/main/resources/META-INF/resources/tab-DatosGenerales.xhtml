@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<div class="ui-g-12">
+		<div class="ui-g-6">
+			<p:fieldset legend="Filtros">
+				<p:commandButton id="btn-filtar" value="Filtrar" title="Filtar"
+					icon="fa fa-fw fa-save" actionListener="#{demoWeb.filtar()}"
+					update=":form-reporte:tabView-Reportes:treeTable-agenciasTree,
+									:form-reporte:tabView-Reportes:char-barGeneral,
+									:form-reporte:tabView-Reportes:char-mixGeneral,
+									:form-reporte:tabView-Reportes:panel-agencias"
+					styleClass="btn-success">
+				</p:commandButton>
+			</p:fieldset>
+		</div>
+	</div>
+
+	<div class="ui-g-12">
+		<p:treeTable id="treeTable-agenciasTree"
+			value="#{demoWeb.rootGeneral}" var="document" resizableColumns="true">
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column rowspan="3" headerText="Agencia"
+						sortBy="#{document.nombre}"  priority="1"/>
+					<p:column colspan="6" headerText="Productividad" />
+					<p:column colspan="6" headerText="" />
+				</p:row>
+				<p:row>
+					<p:column colspan="2" headerText="Nuevos" />
+					<p:column colspan="2" headerText="Campañas" />
+					<p:column colspan="2" headerText="Otros" />
+					<p:column colspan="3" headerText="Cartera Actual" />
+					<p:column colspan="3" headerText="Cartera Anterior" />
+				</p:row>
+				<p:row>
+					<p:column headerText="N° Desembolsos" />
+					<p:column headerText="Monto" />
+					<p:column headerText="N° Desembolsos" />
+					<p:column headerText="Monto" />
+					<p:column headerText="N° Desembolsos" />
+					<p:column headerText="Monto" />
+					<p:column headerText="Nro Clientes" />
+					<p:column headerText="Nro Creditos" />
+					<p:column headerText="Saldos" />
+					<p:column headerText="Nro Clientes" />
+					<p:column headerText="Nro Creditos" />
+					<p:column headerText="Saldos" />
+				</p:row>
+			</p:columnGroup>
+
+			<p:column>
+				<h:outputText value="#{document.nombre}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.nuevoDesembolzo}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.nuevoMonto}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.campaniaMonto}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.campaniaMonto}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.otroDesembolzo}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.otroMonto}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.carteraClientes}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.carteraCreditos}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.carteraSaldos}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.carteraAnteriorClientes}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.carteraAnteriorCreditos}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.carteraAnteriorSaldos}" />
+			</p:column>
+		</p:treeTable>
+	</div>
+	<div class="ui-g-12">
+		<div class="ui-g-12 ui-md-6 ui-lg-6">
+			<p:barChart id="char-barGeneral" model="#{demoWeb.barCharGeneral}"
+				style="width: 100%; height: 500px;" />
+		</div>
+		<div class="ui-g-12 ui-md-6 ui-lg-6">
+
+			<p:barChart id="char-mixGeneral" model="#{demoWeb.mixedGeneral}"
+				style="width: 100%; height: 500px;" />
+		</div>
+	</div>
+	<p:outputPanel id="panel-agencias">
+		<div class="ui-g-12">
+			<p:panel id="panel-huacho" header="Huacho" toggleable="true"
+				collapsed="true" rendered="#{not empty demoWeb.barCharHuacho}">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:barChart id="char-barHuacho" model="#{demoWeb.barCharHuacho}"
+						style="width: 100%; height: 500px;" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:barChart id="char-mixHuacho" model="#{demoWeb.mixedHuacho}"
+						style="width: 100%; height: 500px;" />
+				</div>
+			</p:panel>
+		</div>
+		<div class="ui-g-12">
+			<p:panel id="panel-barranca" header="Barranca" toggleable="true"
+				collapsed="true" rendered="#{not empty demoWeb.barCharBarranca}">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:barChart id="char-barBarranca"
+						model="#{demoWeb.barCharBarranca}"
+						style="width: 100%; height: 500px;" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:barChart id="char-mixBarranca" model="#{demoWeb.mixedBarranca}"
+						style="width: 100%; height: 500px;" />
+				</div>
+			</p:panel>
+		</div>
+		<div class="ui-g-12">
+			<p:panel id="panel-plazaNorte" header="Plaza Norte" toggleable="true"
+				collapsed="true" rendered="#{not empty demoWeb.barCharPlazaNorte}">
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:barChart id="char-barplazaNorte"
+						model="#{demoWeb.barCharPlazaNorte}"
+						style="width: 100%; height: 500px;" />
+				</div>
+				<div class="ui-g-12 ui-md-6 ui-lg-6">
+					<p:barChart id="char-mixplazaNorte"
+						model="#{demoWeb.mixedPlazaNorte}"
+						style="width: 100%; height: 500px;" />
+				</div>
+			</p:panel>
+		</div>
+	</p:outputPanel>
+</ui:composition>

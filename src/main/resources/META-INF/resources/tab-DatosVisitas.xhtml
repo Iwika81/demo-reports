@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<div class="ui-g-12">
+		<p:treeTable id="treeTable-visitasAgencias"
+			value="#{demoWeb.rootVisita}" var="document" resizableColumns="true">
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column rowspan="3" headerText="Agencia"
+						sortBy="#{document.nombre}" />
+					<p:column colspan="8"
+						headerText="Efectividad Visitas Clientes Nuevos" />
+				</p:row>
+				<p:row>
+					<p:column colspan="4" headerText="Periodo Anterior" />
+					<p:column colspan="4" headerText="Periodo Actual" />
+				</p:row>
+				<p:row>
+					<p:column headerText="N° de Visitas" />
+					<p:column headerText="N° de Clientes Nuevos" />
+					<p:column headerText="N° Desembolsos" />
+					<p:column headerText="Monto de desembolsos de clientes nuevos" />
+					<p:column headerText="N° de Visitas" />
+					<p:column headerText="N° de Clientes Nuevos" />
+					<p:column headerText="N° Desembolsos" />
+					<p:column headerText="Monto de desembolsos de clientes nuevos" />
+				</p:row>
+			</p:columnGroup>
+
+			<p:column>
+				<h:outputText value="#{document.nombre}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.periodoAnteriorVisitasRegistradas}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.periodoAnteriorClientesNuevos}" />
+			</p:column>
+			<p:column>
+				<h:outputText
+					value="#{document.periodoAnteriorDesembolsosClientesNuevos}" />
+			</p:column>
+			<p:column>
+				<h:outputText
+					value="#{document.periodoAnteriorMontosClientesNuevos}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.periodoActualVisitasRegistradas}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.periodoActualClientesNuevos}" />
+			</p:column>
+			<p:column>
+				<h:outputText
+					value="#{document.periodoActualDesembolsosClientesNuevos}" />
+			</p:column>
+			<p:column>
+				<h:outputText value="#{document.periodoActualMontosClientesNuevos}" />
+			</p:column>
+		</p:treeTable>
+	</div>
+
+	<div class="ui-g-12">
+		<p:barChart id="char-barVisitasGeneral"
+			model="#{demoWeb.barCharVisitaAgencias}"
+			style="width: 100%; height: 500px;" />
+	</div>
+	<div class="ui-g-12">
+		<p:panel id="panel-visitaHuacho" header="Huacho">
+			<div class="ui-g-12 ui-md-6 ui-lg-6">
+				<p:barChart model="#{demoWeb.barCharVisitaHuacho}"
+					style="width: 100%; height: 500px;" />
+			</div>
+		</p:panel>
+	</div>
+	<div class="ui-g-12">
+		<p:panel id="panel-visitaBarranco" header="Barranca">
+			<div class="ui-g-12 ui-md-6 ui-lg-6">
+				<p:barChart model="#{demoWeb.barCharVisitaBarranca}"
+					style="width: 100%; height: 500px;" />
+			</div>
+		</p:panel>
+	</div>
+	<div class="ui-g-12">
+		<p:panel id="panel-visitaPlazaNorte" header="Plaza Norte">
+			<div class="ui-g-12 ui-md-6 ui-lg-6">
+				<p:barChart model="#{demoWeb.barCharVisitaPlazaNorte}"
+					style="width: 100%; height: 500px;" />
+			</div>
+		</p:panel>
+	</div>
+
+</ui:composition>
