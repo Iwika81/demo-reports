@@ -16,7 +16,7 @@ public class DataService {
 
 		List<AgenciaDto> agencias = new ArrayList<AgenciaDto>();
 
-		AgenciaDto comas = new AgenciaDto("0011", "Comas", new ArrayList<>());
+		AgenciaDto comas = new AgenciaDto("0001", "Comas", new ArrayList<>());
 		AgenciaDto barranca = new AgenciaDto("0004", "Barranca", new ArrayList<>());
 
 		AnalistaDto a1 = new AnalistaDto("Juan Perez", "Senior", 1, new BigDecimal(1500.0), 4, new BigDecimal(1500.0),
@@ -29,9 +29,9 @@ public class DataService {
 		comas.getAnalistas().add(a2);
 		comas.getAnalistas().add(a3);
 
-		AnalistaDto b1 = new AnalistaDto("Martin Perez", "Senior", 3, new BigDecimal(4500.0), 3, new BigDecimal(6000.0),
+		AnalistaDto b1 = new AnalistaDto("Martin Ramirez", "Senior", 3, new BigDecimal(4500.0), 3, new BigDecimal(6000.0),
 				2, new BigDecimal(2000.0), 8, 3, new BigDecimal(4500.0), 6, 2, new BigDecimal(5500.0));
-		AnalistaDto b2 = new AnalistaDto("Martin Caballero", "Senior", 0, BigDecimal.ZERO, 3, new BigDecimal(6000.0), 2,
+		AnalistaDto b2 = new AnalistaDto("Jorgue Ramirez", "Senior", 0, BigDecimal.ZERO, 3, new BigDecimal(6000.0), 2,
 				new BigDecimal(2000.0), 8, 3, new BigDecimal(4500.0), 6, 2, new BigDecimal(5500.0));
 		barranca.getAnalistas().add(b1);
 		barranca.getAnalistas().add(b2);

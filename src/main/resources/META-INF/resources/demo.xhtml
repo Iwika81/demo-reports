@@ -8,7 +8,7 @@
 
 <f:view contentType="text/html">
 	<h:head>
-		<title>.:: Login JoinFaces Example ::.</title>
+		<title>.:: Demos Reporte ::.</title>
 		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
 		<link href="#{resource['images/favicon.ico']}" rel="shortcut icon" />
 	</h:head>
@@ -22,8 +22,9 @@
 							icon="fa fa-fw fa-save" actionListener="#{demoWeb.filtar()}"
 							update=":form-reporte:datatable-reporte,
 									:form-reporte:treeTable-agenciasTree,
-									:form-reporte:char-agencias,
-									:form-reporte:char-mixAgencias"
+									:form-reporte:char-barGeneral,
+									:form-reporte:char-mixGeneral,
+									:form-reporte:panel-agencias"
 							styleClass="btn-success">
 						</p:commandButton>
 					</div>
@@ -114,6 +115,9 @@
 									</p:column>
 									<p:column>
 										<h:outputText value="#{analista.nombre}" />
+									</p:column>
+									<p:column>
+										<h:outputText value="#{analista.perfil}" />
 									</p:column>
 									<p:column>
 										<h:outputText value="#{analista.nuevoDesembolzo}" />
@@ -230,14 +234,65 @@
 							</p:column>
 						</p:treeTable>
 					</div>
-					<div class="ui-g-6">
-						<p:barChart id="char-agencias" model="#{demoWeb.barCharAgencias}"
-							style="width: 100%; height: 500px;" />
+					<div class="ui-g-12">
+						<div class="ui-g-12 ui-md-6 ui-lg-6">
+							<p:barChart id="char-barGeneral"
+								model="#{demoWeb.barCharAgencias}"
+								style="width: 100%; height: 500px;" />
+						</div>
+						<div class="ui-g-12 ui-md-6 ui-lg-6">
+
+							<p:barChart id="char-mixGeneral" model="#{demoWeb.mixedAgencias}"
+								style="width: 100%; height: 500px;" />
+						</div>
 					</div>
-					<div class="ui-g-6">
-						<p:barChart id="char-mixAgencias" model="#{demoWeb.mixedAgencias}"
-							style="width: 100%; height: 500px;" />
-					</div>
+					<p:outputPanel id="panel-agencias">
+						<div class="ui-g-12">
+							<p:panel id="panel-huacho" header="Huacho" toggleable="true"
+								collapsed="true" rendered="#{not empty demoWeb.barCharHuacho}">
+								<div class="ui-g-12 ui-md-6 ui-lg-6">
+									<p:barChart id="char-barHuacho"
+										model="#{demoWeb.barCharHuacho}"
+										style="width: 100%; height: 500px;" />
+								</div>
+								<div class="ui-g-12 ui-md-6 ui-lg-6">
+									<p:barChart id="char-mixHuacho" model="#{demoWeb.mixedHuacho}"
+										style="width: 100%; height: 500px;" />
+								</div>
+							</p:panel>
+						</div>
+						<div class="ui-g-12">
+							<p:panel id="panel-barranca" header="Barranca" toggleable="true"
+								collapsed="true" rendered="#{not empty demoWeb.barCharBarranca}">
+								<div class="ui-g-12 ui-md-6 ui-lg-6">
+									<p:barChart id="char-barBarranca"
+										model="#{demoWeb.barCharBarranca}"
+										style="width: 100%; height: 500px;" />
+								</div>
+								<div class="ui-g-12 ui-md-6 ui-lg-6">
+									<p:barChart id="char-mixBarranca"
+										model="#{demoWeb.mixedBarranca}"
+										style="width: 100%; height: 500px;" />
+								</div>
+							</p:panel>
+						</div>
+						<div class="ui-g-12">
+							<p:panel id="panel-plazaNorte" header="Plaza Norte"
+								toggleable="true" collapsed="true"
+								rendered="#{not empty demoWeb.barCharPlazaNorte}">
+								<div class="ui-g-12 ui-md-6 ui-lg-6">
+									<p:barChart id="char-barplazaNorte"
+										model="#{demoWeb.barCharPlazaNorte}"
+										style="width: 100%; height: 500px;" />
+								</div>
+								<div class="ui-g-12 ui-md-6 ui-lg-6">
+									<p:barChart id="char-mixplazaNorte"
+										model="#{demoWeb.mixedPlazaNorte}"
+										style="width: 100%; height: 500px;" />
+								</div>
+							</p:panel>
+						</div>
+					</p:outputPanel>
 				</h:form>
 			</pe:layoutPane>
 		</pe:layout>
