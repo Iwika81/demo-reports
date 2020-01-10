@@ -6,35 +6,35 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import pe.com.prymera.dto.AgenciaDto;
-import pe.com.prymera.dto.AnalistaDto;
+import pe.com.prymera.dto.EficienciaGeneralAgenciaDto;
+import pe.com.prymera.dto.EficienciaGeneralAnalistaDto;
 import pe.com.prymera.dto.EficienciaVisitaAgenciaDto;
 import pe.com.prymera.dto.EficienciaVisitaAnalistaDto;
 
 @Service
 public class DataService {
 
-	public List<AgenciaDto> crearResultas() {
+	public List<EficienciaGeneralAgenciaDto> crearResultas() {
 
-		List<AgenciaDto> agencias = new ArrayList<AgenciaDto>();
+		List<EficienciaGeneralAgenciaDto> agencias = new ArrayList<EficienciaGeneralAgenciaDto>();
 
-		AgenciaDto comas = new AgenciaDto("0001", "Comas", new ArrayList<>());
-		AgenciaDto barranca = new AgenciaDto("0004", "Barranca", new ArrayList<>());
+		EficienciaGeneralAgenciaDto comas = new EficienciaGeneralAgenciaDto("0001", "Comas", new ArrayList<>());
+		EficienciaGeneralAgenciaDto barranca = new EficienciaGeneralAgenciaDto("0004", "Barranca", new ArrayList<>());
 
-		AnalistaDto a1 = new AnalistaDto("Juan Perez", "Senior", 1, new BigDecimal(1500.0), 4, new BigDecimal(1500.0),
+		EficienciaGeneralAnalistaDto a1 = new EficienciaGeneralAnalistaDto("Juan Perez", "Senior", 1, new BigDecimal(1500.0), 4, new BigDecimal(1500.0),
 				2, new BigDecimal(1000.0), 4, 3, new BigDecimal(4500.0), 8, 2, new BigDecimal(5500.0));
-		AnalistaDto a2 = new AnalistaDto("Martin Perez", "Senior", 2, new BigDecimal(1500.0), 4, new BigDecimal(1500.0),
+		EficienciaGeneralAnalistaDto a2 = new EficienciaGeneralAnalistaDto("Martin Perez", "Senior", 2, new BigDecimal(1500.0), 4, new BigDecimal(1500.0),
 				2, new BigDecimal(1000.0), 3, 3, new BigDecimal(4500.0), 7, 2, new BigDecimal(5500.0));
-		AnalistaDto a3 = new AnalistaDto("Dany Perez", "Senior", 5, new BigDecimal(1500.0), 4, new BigDecimal(1500.0),
+		EficienciaGeneralAnalistaDto a3 = new EficienciaGeneralAnalistaDto("Dany Perez", "Senior", 5, new BigDecimal(1500.0), 4, new BigDecimal(1500.0),
 				2, new BigDecimal(1000.0), 8, 3, new BigDecimal(4500.0), 6, 2, new BigDecimal(5500.0));
 		comas.getAnalistas().add(a1);
 		comas.getAnalistas().add(a2);
 		comas.getAnalistas().add(a3);
 
-		AnalistaDto b1 = new AnalistaDto("Martin Ramirez", "Senior", 3, new BigDecimal(4500.0), 3,
+		EficienciaGeneralAnalistaDto b1 = new EficienciaGeneralAnalistaDto("Martin Ramirez", "Senior", 3, new BigDecimal(4500.0), 3,
 				new BigDecimal(6000.0), 2, new BigDecimal(2000.0), 8, 3, new BigDecimal(4500.0), 6, 2,
 				new BigDecimal(5500.0));
-		AnalistaDto b2 = new AnalistaDto("Jorgue Ramirez", "Senior", 0, BigDecimal.ZERO, 3, new BigDecimal(6000.0), 2,
+		EficienciaGeneralAnalistaDto b2 = new EficienciaGeneralAnalistaDto("Jorgue Ramirez", "Senior", 0, BigDecimal.ZERO, 3, new BigDecimal(6000.0), 2,
 				new BigDecimal(2000.0), 8, 3, new BigDecimal(4500.0), 6, 2, new BigDecimal(5500.0));
 		barranca.getAnalistas().add(b1);
 		barranca.getAnalistas().add(b2);

@@ -30,11 +30,11 @@ import lombok.Setter;
 import lombok.extern.java.Log;
 import pe.com.prymera.assembler.ReporteEficienciaDtoAssembler;
 import pe.com.prymera.assembler.ReporteEficienciaVisitaDtoAssembler;
-import pe.com.prymera.dto.AgenciaDto;
-import pe.com.prymera.dto.AnalistaDto;
+import pe.com.prymera.dto.EficienciaGeneralAgenciaDto;
+import pe.com.prymera.dto.EficienciaGeneralAnalistaDto;
 import pe.com.prymera.dto.EficienciaVisitaAgenciaDto;
 import pe.com.prymera.dto.EficienciaVisitaAnalistaDto;
-import pe.com.prymera.dto.ReporteEficienciaDto;
+import pe.com.prymera.dto.ReporteEficienciaGeneralDto;
 import pe.com.prymera.service.DataService;
 
 @Component
@@ -54,7 +54,7 @@ public class DemoWeb implements Serializable {
 	private ReporteEficienciaVisitaDtoAssembler reporteEficienciaVisitaDtoAssembler;
 
 	// Reporte Gerencial
-	private List<AgenciaDto> agencias;
+	private List<EficienciaGeneralAgenciaDto> agencias;
 	private TreeNode rootGeneral;
 	private BarChartModel barCharGeneral;
 	private BarChartModel mixedGeneral;
@@ -90,7 +90,7 @@ public class DemoWeb implements Serializable {
 		barCharGeneral = generarBarCharGeneral(agencias, "Clientes Nuevos por Agencias");
 		mixedGeneral = generarMixBarCharGeneral(agencias, "Cartera de clientes por Agencias");
 		clearCharsGeneral();
-		for (AgenciaDto agencia : agencias) {
+		for (EficienciaGeneralAgenciaDto agencia : agencias) {
 			if (agencia.getId().equals("0001")) { // HUACHO
 				barCharHuacho = generarBarCharXAgencia(agencia.getAnalistas(), agencia.getNombre(),
 						"Clientes Nuevos - ");
@@ -137,8 +137,8 @@ public class DemoWeb implements Serializable {
 
 	public void filtar() {
 		log.info("filtrar");
-		AgenciaDto plazaNorte = new AgenciaDto("0006", "Plaza Norte", new ArrayList<>());
-		AnalistaDto p1 = new AnalistaDto("Sofia Caballero", "Junior", 3, new BigDecimal(1500.0), 3,
+		EficienciaGeneralAgenciaDto plazaNorte = new EficienciaGeneralAgenciaDto("0006", "Plaza Norte", new ArrayList<>());
+		EficienciaGeneralAnalistaDto p1 = new EficienciaGeneralAnalistaDto("Sofia Caballero", "Junior", 3, new BigDecimal(1500.0), 3,
 				new BigDecimal(1500.0), 2, new BigDecimal(2000.0), 8, 3, new BigDecimal(4500.0), 6, 2,
 				new BigDecimal(5500.0));
 		plazaNorte.getAnalistas().add(p1);
@@ -148,10 +148,10 @@ public class DemoWeb implements Serializable {
 
 	/// Metodos para generar Graficos General
 	public DefaultTreeNode generarTree() {
-		DefaultTreeNode root = new DefaultTreeNode(new ReporteEficienciaDto(), null);
-		for (AgenciaDto agencia : agencias) {
+		DefaultTreeNode root = new DefaultTreeNode(new ReporteEficienciaGeneralDto(), null);
+		for (EficienciaGeneralAgenciaDto agencia : agencias) {
 			TreeNode var = new DefaultTreeNode(reporteEficienciaDtoAssembler.toDto(agencia), root);
-			for (AnalistaDto analista : agencia.getAnalistas()) {
+			for (EficienciaGeneralAnalistaDto analista : agencia.getAnalistas()) {
 				new DefaultTreeNode(reporteEficienciaDtoAssembler.toDto(analista), var);
 			}
 		}
@@ -167,7 +167,7 @@ public class DemoWeb implements Serializable {
 		mixedPlazaNorte = null;
 	}
 
-	public BarChartModel generarBarCharGeneral(List<AgenciaDto> agencias, String titulo) {
+	public BarChartModel generarBarCharGeneral(List<EficienciaGeneralAgenciaDto> agencias, String titulo) {
 		BarChartModel barCharAgencias = new BarChartModel();
 		ChartData data = new ChartData();
 
@@ -221,7 +221,7 @@ public class DemoWeb implements Serializable {
 		return barCharAgencias;
 	}
 
-	public BarChartModel generarBarCharXAgencia(List<AnalistaDto> list, String nombreAgencia, String titulo) {
+	public BarChartModel generarBarCharXAgencia(List<EficienciaGeneralAnalistaDto> list, String nombreAgencia, String titulo) {
 		BarChartModel model = new BarChartModel();
 		ChartData data = new ChartData();
 
@@ -276,7 +276,7 @@ public class DemoWeb implements Serializable {
 		return model;
 	}
 
-	public BarChartModel generarMixBarCharGeneral(List<AgenciaDto> agencias, String titulo) {
+	public BarChartModel generarMixBarCharGeneral(List<EficienciaGeneralAgenciaDto> agencias, String titulo) {
 		BarChartModel mixedAgencias = new BarChartModel();
 		ChartData data = new ChartData();
 
@@ -339,7 +339,7 @@ public class DemoWeb implements Serializable {
 		return mixedAgencias;
 	}
 
-	public BarChartModel generarMixBarCharXAgencia(List<AnalistaDto> list, String nombreAgencia, String titulo) {
+	public BarChartModel generarMixBarCharXAgencia(List<EficienciaGeneralAnalistaDto> list, String nombreAgencia, String titulo) {
 		BarChartModel mixModel = new BarChartModel();
 		ChartData data = new ChartData();
 
@@ -404,7 +404,7 @@ public class DemoWeb implements Serializable {
 
 	/// Metodos para generar Graficos Visitas
 	public DefaultTreeNode generarTreeVisitas() {
-		DefaultTreeNode root = new DefaultTreeNode(new ReporteEficienciaDto(), null);
+		DefaultTreeNode root = new DefaultTreeNode(new ReporteEficienciaGeneralDto(), null);
 		for (EficienciaVisitaAgenciaDto agencia : visitasXAgencia) {
 			TreeNode var = new DefaultTreeNode(reporteEficienciaVisitaDtoAssembler.toDto(agencia), root);
 			for (EficienciaVisitaAnalistaDto analista : agencia.getAnalistas()) {
