@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import pe.com.prymera.assembler.ReporteEficienciaDtoAssembler;
+import pe.com.prymera.assembler.ReporteEficienciaGeneralDtoAssembler;
 import pe.com.prymera.assembler.ReporteEficienciaVisitaDtoAssembler;
 import pe.com.prymera.dto.EficienciaGeneralAgenciaDto;
 import pe.com.prymera.dto.EficienciaGeneralAnalistaDto;
@@ -49,7 +49,7 @@ public class DemoWeb implements Serializable {
 	@Inject
 	private DataService service;
 	@Inject
-	private ReporteEficienciaDtoAssembler reporteEficienciaDtoAssembler;
+	private ReporteEficienciaGeneralDtoAssembler reporteEficienciaDtoAssembler;
 	@Inject
 	private ReporteEficienciaVisitaDtoAssembler reporteEficienciaVisitaDtoAssembler;
 

@@ -7,7 +7,7 @@ import pe.com.prymera.dto.EficienciaGeneralAnalistaDto;
 import pe.com.prymera.dto.ReporteEficienciaGeneralDto;
 
 @Service
-public class ReporteEficienciaDtoAssembler {
+public class ReporteEficienciaGeneralDtoAssembler {
 
 	public ReporteEficienciaGeneralDto toDto(EficienciaGeneralAgenciaDto agencia) {
 		return new ReporteEficienciaGeneralDto(agencia.getNombre(), agencia.getNuevoDesembolzos(), agencia.getNuevoMontos(),
