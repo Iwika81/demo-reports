@@ -492,20 +492,20 @@ public class DemoWeb implements Serializable {
 		BarChartOptions options = new BarChartOptions();
 		CartesianScales cScales = new CartesianScales();
 
-		CartesianLinearAxes linearYAxesCantidades = new CartesianLinearAxes();
-		linearYAxesCantidades.setId("linearYAxesCantidades");
-		linearYAxesCantidades.setPosition("left");
-		CartesianLinearTicks ticks = new CartesianLinearTicks();
-		ticks.setBeginAtZero(true);
-		linearYAxesCantidades.setTicks(ticks);
+//		CartesianLinearAxes linearYAxesCantidades = new CartesianLinearAxes();
+//		linearYAxesCantidades.setId("linearYAxesCantidades");
+//		linearYAxesCantidades.setPosition("left");
+//		CartesianLinearTicks ticks = new CartesianLinearTicks();
+//		ticks.setBeginAtZero(true);
+//		linearYAxesCantidades.setTicks(ticks);
 
 		CartesianLinearAxes linearYAxesPorcentaje = new CartesianLinearAxes();
 		linearYAxesPorcentaje.setId("linearYAxesPorcentaje");
 		linearYAxesPorcentaje.setPosition("right");
-		AxesGridLines gridLines = new AxesGridLines();
-		gridLines.setDrawBorder(false);
-		gridLines.setDrawOnChartArea(false);
-		linearYAxesPorcentaje.setGridLines(gridLines);
+//		AxesGridLines gridLines = new AxesGridLines();
+//		gridLines.setDrawBorder(false);
+//		gridLines.setDrawOnChartArea(false);
+//		linearYAxesPorcentaje.setGridLines(gridLines);
 		CartesianLinearTicks ticksPorcentaje = new CartesianLinearTicks();
 		ticksPorcentaje.setBeginAtZero(true);
 //		ticksPorcentaje.setMax(1);
