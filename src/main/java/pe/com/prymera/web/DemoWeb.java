@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 import org.primefaces.model.charts.ChartData;
+import org.primefaces.model.charts.axes.AxesGridLines;
 import org.primefaces.model.charts.axes.cartesian.CartesianScales;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearAxes;
 import org.primefaces.model.charts.axes.cartesian.linear.CartesianLinearTicks;
@@ -77,12 +78,20 @@ public class DemoWeb implements Serializable {
 	private BarChartModel barCharVisitaPlazaNorte;
 	private BarChartModel mixedVisitaPlazaNorte;
 
+	// Reporte Desembolso Gestion
+	private BarChartModel mixedModelGeneral = new BarChartModel();
+	private BarChartModel mixedModelAgencias = new BarChartModel();
+	private BarChartModel mixedModelEfectividad = new BarChartModel();
+
 	@PostConstruct
 	public void init() {
 		agencias = service.crearResultas();
 		visitasXAgencia = service.crearDataReporteVisita();
 		generarReporteGeneral();
 		generarReporteVisitas();
+		mixedModelGeneral = generarReporteDesembolsoGestion();
+		mixedModelAgencias = generarReporteDesembolsoGestionAgencias();
+		mixedModelEfectividad= generarReporteDesembolsoGestionEfectividad();
 	}
 
 	public void generarReporteGeneral() {
@@ -132,15 +141,393 @@ public class DemoWeb implements Serializable {
 				// agencia.getNombre());
 			}
 		}
+	}
 
+	public BarChartModel generarReporteDesembolsoGestion() {
+		BarChartModel mixedModel = new BarChartModel();
+		ChartData data = new ChartData();
+
+		BarChartDataSet dataSetCampania = new BarChartDataSet();
+		List<Number> valuesCampania = new ArrayList<>();
+		valuesCampania.add(10);
+		valuesCampania.add(0);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(20);
+		dataSetCampania.setData(valuesCampania);
+		dataSetCampania.setLabel("Campanias");
+		dataSetCampania.setBackgroundColor("rgb(255, 99, 132)");
+		dataSetCampania.setYaxisID("linearYAxesCantidades");
+
+		BarChartDataSet dataSetGestiones = new BarChartDataSet();
+		List<Number> valuesGestiones = new ArrayList<>();
+		valuesGestiones.add(5);
+		valuesGestiones.add(0);
+		valuesGestiones.add(20);
+		valuesGestiones.add(30);
+		valuesGestiones.add(25);
+		valuesGestiones.add(28);
+		valuesGestiones.add(30);
+		valuesGestiones.add(35);
+		valuesGestiones.add(28);
+		valuesGestiones.add(38);
+		valuesGestiones.add(24);
+		valuesGestiones.add(38);
+		valuesGestiones.add(19);
+		dataSetGestiones.setData(valuesGestiones);
+		dataSetGestiones.setLabel("Gestiones");
+		dataSetGestiones.setYaxisID("linearYAxesCantidades");
+		dataSetGestiones.setBackgroundColor("rgb(75, 192, 192)");
+
+		BarChartDataSet dataSetDesembolso = new BarChartDataSet();
+		List<Number> valuesDesembolso = new ArrayList<>();
+		valuesDesembolso.add(2);
+		valuesDesembolso.add(0);
+		valuesDesembolso.add(10);
+		valuesDesembolso.add(20);
+		valuesDesembolso.add(15);
+		valuesDesembolso.add(5);
+		valuesDesembolso.add(20);
+		valuesDesembolso.add(26);
+		valuesDesembolso.add(25);
+		valuesDesembolso.add(23);
+		valuesDesembolso.add(19);
+		valuesDesembolso.add(10);
+		valuesDesembolso.add(10);
+		dataSetDesembolso.setData(valuesDesembolso);
+		dataSetDesembolso.setLabel("Desembolsos");
+		dataSetDesembolso.setYaxisID("linearYAxesCantidades");
+		dataSetDesembolso.setBackgroundColor("rgb(75, 140, 150)");
+
+		LineChartDataSet dataSetPorcentajes = new LineChartDataSet();
+		List<Number> valuesPorcentajes = new ArrayList<>();
+		valuesPorcentajes.add(0.5);
+		valuesPorcentajes.add(0);
+		valuesPorcentajes.add(0.8);
+		valuesPorcentajes.add(0.6);
+		valuesPorcentajes.add(0.2);
+		valuesPorcentajes.add(0.40);
+		valuesPorcentajes.add(0.23);
+		valuesPorcentajes.add(0.24);
+		valuesPorcentajes.add(0.27);
+		valuesPorcentajes.add(0.35);
+		valuesPorcentajes.add(0.15);
+		valuesPorcentajes.add(0);
+		valuesPorcentajes.add(0.5);
+		dataSetPorcentajes.setData(valuesPorcentajes);
+		dataSetPorcentajes.setLabel("Efectividad de Gestion");
+		dataSetPorcentajes.setYaxisID("linearYAxesPorcentaje");
+		dataSetPorcentajes.setFill(false);
+		dataSetPorcentajes.setBackgroundColor("rgb(0, 0, 255)");
+		dataSetPorcentajes.setPointBackgroundColor("rgb(0, 0, 255)");
+		dataSetPorcentajes.setShowLine(true);
+
+		LineChartDataSet dataSetPorcentajesDesembolso = new LineChartDataSet();
+		List<Number> valuesPorcentajesDesembolso = new ArrayList<>();
+		valuesPorcentajesDesembolso.add(0.2);
+		valuesPorcentajesDesembolso.add(0);
+		valuesPorcentajesDesembolso.add(0.3);
+		valuesPorcentajesDesembolso.add(0.4);
+		valuesPorcentajesDesembolso.add(0.25);
+		valuesPorcentajesDesembolso.add(0.27);
+		valuesPorcentajesDesembolso.add(0.17);
+		valuesPorcentajesDesembolso.add(0.14);
+		valuesPorcentajesDesembolso.add(0.16);
+		valuesPorcentajesDesembolso.add(0.18);
+		valuesPorcentajesDesembolso.add(0.06);
+		valuesPorcentajesDesembolso.add(0);
+		valuesPorcentajesDesembolso.add(0.22);
+		dataSetPorcentajesDesembolso.setData(valuesPorcentajesDesembolso);
+		dataSetPorcentajesDesembolso.setLabel("Efectividad de Desembolsos");
+		dataSetPorcentajesDesembolso.setYaxisID("linearYAxesPorcentaje");
+		dataSetPorcentajesDesembolso.setFill(false);
+		dataSetPorcentajesDesembolso.setBackgroundColor("rgb(0, 250, 0)");
+		dataSetPorcentajesDesembolso.setPointBackgroundColor("rgb(0, 255, 0)");
+		dataSetPorcentajesDesembolso.setShowLine(true);
+
+		data.addChartDataSet(dataSetPorcentajes);
+		data.addChartDataSet(dataSetPorcentajesDesembolso);
+		data.addChartDataSet(dataSetCampania);
+		data.addChartDataSet(dataSetGestiones);
+		data.addChartDataSet(dataSetDesembolso);
+
+		List<String> labels = new ArrayList<>();
+		labels.add("Huacho");
+		labels.add("Miraflores");
+		labels.add("Huaral");
+		labels.add("Barranca");
+		labels.add("Puente Piedra");
+		labels.add("Plaza Norte");
+		labels.add("San Juan de Lurigancho");
+		labels.add("Villa El Salvador");
+		labels.add("Gran Chimu");
+		labels.add("San Juan de Miraflores");
+		labels.add("Comas");
+		labels.add("Ceres");
+		labels.add("Villa Maria");
+
+		data.setLabels(labels);
+
+		mixedModel.setData(data);
+
+		// Options
+		BarChartOptions options = new BarChartOptions();
+		CartesianScales cScales = new CartesianScales();
+
+		CartesianLinearAxes linearYAxesCantidades = new CartesianLinearAxes();
+		linearYAxesCantidades.setId("linearYAxesCantidades");
+		linearYAxesCantidades.setPosition("left");
+		CartesianLinearTicks ticks = new CartesianLinearTicks();
+		ticks.setBeginAtZero(true);
+		linearYAxesCantidades.setTicks(ticks);
+
+		CartesianLinearAxes linearYAxesPorcentaje = new CartesianLinearAxes();
+		linearYAxesPorcentaje.setId("linearYAxesPorcentaje");
+		linearYAxesPorcentaje.setPosition("right");
+		AxesGridLines gridLines = new AxesGridLines();
+		gridLines.setDrawBorder(false);
+		gridLines.setDrawOnChartArea(false);
+		linearYAxesPorcentaje.setGridLines(gridLines);
+		CartesianLinearTicks ticksPorcentaje = new CartesianLinearTicks();
+		ticksPorcentaje.setBeginAtZero(true);
+//		ticksPorcentaje.setMax(1);
+//		ticksPorcentaje.setMin(0);		
+		linearYAxesPorcentaje.setTicks(ticksPorcentaje);
+		linearYAxesPorcentaje.setOffset(true);
+		cScales.addYAxesData(linearYAxesCantidades);
+		cScales.addYAxesData(linearYAxesPorcentaje);
+
+		options.setScales(cScales);
+		mixedModel.setOptions(options);
+
+		return mixedModel;
+	}
+
+	public BarChartModel generarReporteDesembolsoGestionAgencias() {
+		BarChartModel mixedModel = new BarChartModel();
+		ChartData data = new ChartData();
+
+		BarChartDataSet dataSetCampania = new BarChartDataSet();
+		List<Number> valuesCampania = new ArrayList<>();
+		valuesCampania.add(10);
+		valuesCampania.add(0);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(30);
+		valuesCampania.add(40);
+		valuesCampania.add(20);
+		dataSetCampania.setData(valuesCampania);
+		dataSetCampania.setLabel("Campanias");
+		dataSetCampania.setBackgroundColor("rgb(255, 99, 132)");
+		dataSetCampania.setYaxisID("linearYAxesCantidades");
+
+		BarChartDataSet dataSetGestiones = new BarChartDataSet();
+		List<Number> valuesGestiones = new ArrayList<>();
+		valuesGestiones.add(5);
+		valuesGestiones.add(0);
+		valuesGestiones.add(20);
+		valuesGestiones.add(30);
+		valuesGestiones.add(25);
+		valuesGestiones.add(28);
+		valuesGestiones.add(30);
+		valuesGestiones.add(35);
+		valuesGestiones.add(28);
+		valuesGestiones.add(38);
+		valuesGestiones.add(24);
+		valuesGestiones.add(38);
+		valuesGestiones.add(19);
+		dataSetGestiones.setData(valuesGestiones);
+		dataSetGestiones.setLabel("Gestiones");
+		dataSetGestiones.setYaxisID("linearYAxesCantidades");
+		dataSetGestiones.setBackgroundColor("rgb(75, 192, 192)");
+
+		BarChartDataSet dataSetDesembolso = new BarChartDataSet();
+		List<Number> valuesDesembolso = new ArrayList<>();
+		valuesDesembolso.add(2);
+		valuesDesembolso.add(0);
+		valuesDesembolso.add(10);
+		valuesDesembolso.add(20);
+		valuesDesembolso.add(15);
+		valuesDesembolso.add(5);
+		valuesDesembolso.add(20);
+		valuesDesembolso.add(26);
+		valuesDesembolso.add(25);
+		valuesDesembolso.add(23);
+		valuesDesembolso.add(19);
+		valuesDesembolso.add(10);
+		valuesDesembolso.add(10);
+		dataSetDesembolso.setData(valuesDesembolso);
+		dataSetDesembolso.setLabel("Desembolsos");
+		dataSetDesembolso.setYaxisID("linearYAxesCantidades");
+		dataSetDesembolso.setBackgroundColor("rgb(75, 140, 150)");
+
+		data.addChartDataSet(dataSetCampania);
+		data.addChartDataSet(dataSetGestiones);
+		data.addChartDataSet(dataSetDesembolso);
+
+		List<String> labels = new ArrayList<>();
+		labels.add("Huacho");
+		labels.add("Miraflores");
+		labels.add("Huaral");
+		labels.add("Barranca");
+		labels.add("Puente Piedra");
+		labels.add("Plaza Norte");
+		labels.add("San Juan de Lurigancho");
+		labels.add("Villa El Salvador");
+		labels.add("Gran Chimu");
+		labels.add("San Juan de Miraflores");
+		labels.add("Comas");
+		labels.add("Ceres");
+		labels.add("Villa Maria");
+
+		data.setLabels(labels);
+
+		mixedModel.setData(data);
+
+		// Options
+		BarChartOptions options = new BarChartOptions();
+		CartesianScales cScales = new CartesianScales();
+
+		CartesianLinearAxes linearYAxesCantidades = new CartesianLinearAxes();
+		linearYAxesCantidades.setId("linearYAxesCantidades");
+		linearYAxesCantidades.setPosition("left");
+		CartesianLinearTicks ticks = new CartesianLinearTicks();
+		ticks.setBeginAtZero(true);
+		linearYAxesCantidades.setTicks(ticks);
+		cScales.addYAxesData(linearYAxesCantidades);
+		
+		options.setScales(cScales);
+		mixedModel.setOptions(options);
+
+		return mixedModel;
+	}
+	
+	public BarChartModel generarReporteDesembolsoGestionEfectividad() {
+		BarChartModel mixedModel = new BarChartModel();
+		ChartData data = new ChartData();
+
+		LineChartDataSet dataSetPorcentajes = new LineChartDataSet();
+		List<Number> valuesPorcentajes = new ArrayList<>();
+		valuesPorcentajes.add(0.5);
+		valuesPorcentajes.add(0);
+		valuesPorcentajes.add(0.8);
+		valuesPorcentajes.add(0.6);
+		valuesPorcentajes.add(0.2);
+		valuesPorcentajes.add(0.40);
+		valuesPorcentajes.add(0.23);
+		valuesPorcentajes.add(0.24);
+		valuesPorcentajes.add(0.27);
+		valuesPorcentajes.add(0.35);
+		valuesPorcentajes.add(0.15);
+		valuesPorcentajes.add(0);
+		valuesPorcentajes.add(0.5);
+		dataSetPorcentajes.setData(valuesPorcentajes);
+		dataSetPorcentajes.setLabel("Efectividad de Gestion");
+		dataSetPorcentajes.setYaxisID("linearYAxesPorcentaje");
+		dataSetPorcentajes.setFill(false);
+		dataSetPorcentajes.setBackgroundColor("rgb(0, 0, 255)");
+		dataSetPorcentajes.setPointBackgroundColor("rgb(0, 0, 255)");
+		dataSetPorcentajes.setShowLine(true);
+
+		LineChartDataSet dataSetPorcentajesDesembolso = new LineChartDataSet();
+		List<Number> valuesPorcentajesDesembolso = new ArrayList<>();
+		valuesPorcentajesDesembolso.add(0.2);
+		valuesPorcentajesDesembolso.add(0);
+		valuesPorcentajesDesembolso.add(0.3);
+		valuesPorcentajesDesembolso.add(0.4);
+		valuesPorcentajesDesembolso.add(0.25);
+		valuesPorcentajesDesembolso.add(0.27);
+		valuesPorcentajesDesembolso.add(0.17);
+		valuesPorcentajesDesembolso.add(0.14);
+		valuesPorcentajesDesembolso.add(0.16);
+		valuesPorcentajesDesembolso.add(0.18);
+		valuesPorcentajesDesembolso.add(0.06);
+		valuesPorcentajesDesembolso.add(0);
+		valuesPorcentajesDesembolso.add(0.22);
+		dataSetPorcentajesDesembolso.setData(valuesPorcentajesDesembolso);
+		dataSetPorcentajesDesembolso.setLabel("Efectividad de Desembolsos");
+		dataSetPorcentajesDesembolso.setYaxisID("linearYAxesPorcentaje");
+		dataSetPorcentajesDesembolso.setFill(false);
+		dataSetPorcentajesDesembolso.setBackgroundColor("rgb(0, 250, 0)");
+		dataSetPorcentajesDesembolso.setPointBackgroundColor("rgb(0, 255, 0)");
+		dataSetPorcentajesDesembolso.setShowLine(true);
+
+		data.addChartDataSet(dataSetPorcentajes);
+		data.addChartDataSet(dataSetPorcentajesDesembolso);
+
+		List<String> labels = new ArrayList<>();
+		labels.add("Huacho");
+		labels.add("Miraflores");
+		labels.add("Huaral");
+		labels.add("Barranca");
+		labels.add("Puente Piedra");
+		labels.add("Plaza Norte");
+		labels.add("San Juan de Lurigancho");
+		labels.add("Villa El Salvador");
+		labels.add("Gran Chimu");
+		labels.add("San Juan de Miraflores");
+		labels.add("Comas");
+		labels.add("Ceres");
+		labels.add("Villa Maria");
+
+		data.setLabels(labels);
+
+		mixedModel.setData(data);
+
+		// Options
+		BarChartOptions options = new BarChartOptions();
+		CartesianScales cScales = new CartesianScales();
+
+		CartesianLinearAxes linearYAxesCantidades = new CartesianLinearAxes();
+		linearYAxesCantidades.setId("linearYAxesCantidades");
+		linearYAxesCantidades.setPosition("left");
+		CartesianLinearTicks ticks = new CartesianLinearTicks();
+		ticks.setBeginAtZero(true);
+		linearYAxesCantidades.setTicks(ticks);
+
+		CartesianLinearAxes linearYAxesPorcentaje = new CartesianLinearAxes();
+		linearYAxesPorcentaje.setId("linearYAxesPorcentaje");
+		linearYAxesPorcentaje.setPosition("right");
+		AxesGridLines gridLines = new AxesGridLines();
+		gridLines.setDrawBorder(false);
+		gridLines.setDrawOnChartArea(false);
+		linearYAxesPorcentaje.setGridLines(gridLines);
+		CartesianLinearTicks ticksPorcentaje = new CartesianLinearTicks();
+		ticksPorcentaje.setBeginAtZero(true);
+//		ticksPorcentaje.setMax(1);
+//		ticksPorcentaje.setMin(0);		
+		linearYAxesPorcentaje.setTicks(ticksPorcentaje);
+		linearYAxesPorcentaje.setOffset(true);
+		//cScales.addYAxesData(linearYAxesCantidades);
+		cScales.addYAxesData(linearYAxesPorcentaje);
+
+		options.setScales(cScales);
+		mixedModel.setOptions(options);
+
+		return mixedModel;
 	}
 
 	public void filtar() {
 		log.info("filtrar");
-		EficienciaGeneralAgenciaDto plazaNorte = new EficienciaGeneralAgenciaDto("0006", "Plaza Norte", new ArrayList<>());
-		EficienciaGeneralAnalistaDto p1 = new EficienciaGeneralAnalistaDto("Sofia Caballero", "Junior", 3, new BigDecimal(1500.0), 3,
-				new BigDecimal(1500.0), 2, new BigDecimal(2000.0), 8, 3, new BigDecimal(4500.0), 6, 2,
-				new BigDecimal(5500.0));
+		EficienciaGeneralAgenciaDto plazaNorte = new EficienciaGeneralAgenciaDto("0006", "Plaza Norte",
+				new ArrayList<>());
+		EficienciaGeneralAnalistaDto p1 = new EficienciaGeneralAnalistaDto("Sofia Caballero", "Junior", 3,
+				new BigDecimal(1500.0), 3, new BigDecimal(1500.0), 2, new BigDecimal(2000.0), 8, 3,
+				new BigDecimal(4500.0), 6, 2, new BigDecimal(5500.0));
 		plazaNorte.getAnalistas().add(p1);
 		agencias.add(plazaNorte);
 		generarReporteGeneral();
@@ -221,7 +608,8 @@ public class DemoWeb implements Serializable {
 		return barCharAgencias;
 	}
 
-	public BarChartModel generarBarCharXAgencia(List<EficienciaGeneralAnalistaDto> list, String nombreAgencia, String titulo) {
+	public BarChartModel generarBarCharXAgencia(List<EficienciaGeneralAnalistaDto> list, String nombreAgencia,
+			String titulo) {
 		BarChartModel model = new BarChartModel();
 		ChartData data = new ChartData();
 
@@ -339,7 +727,8 @@ public class DemoWeb implements Serializable {
 		return mixedAgencias;
 	}
 
-	public BarChartModel generarMixBarCharXAgencia(List<EficienciaGeneralAnalistaDto> list, String nombreAgencia, String titulo) {
+	public BarChartModel generarMixBarCharXAgencia(List<EficienciaGeneralAnalistaDto> list, String nombreAgencia,
+			String titulo) {
 		BarChartModel mixModel = new BarChartModel();
 		ChartData data = new ChartData();
 
